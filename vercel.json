@@ -1,9 +1,6 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "cleanUrls": true,
-  "functions": {
-    "api/contact.ts": { "maxDuration": 10 }
-  },
   "headers": [
     {
       "source": "/(.*)",
