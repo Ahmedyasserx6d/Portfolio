@@ -1,0 +1,297 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ahmed Mohamed Abdulsamad | Backend &amp; Systems Engineer</title>
+<meta name="description" content="Backend & Systems Engineer (Node.js/TypeScript, Python). Payments, clinical data, offline sync and licensing. Fixed-price sprints from $500.">
+<meta name="theme-color" content="#16161E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com/3.4.17"></script>
+<script>
+tailwind.config={theme:{extend:{colors:{canvas:'#16161E',surface:'#1A1B26',hov:'#1F2335',ink:'#C0CAF5',muted:'#7982A9',line:'#24283B',accent:'#7AA2F7',violet:'#BB9AF7',ok:'#9ECE6A'},fontFamily:{sans:['Inter','system-ui','sans-serif'],mono:['JetBrains Mono','ui-monospace','monospace']}}}}
+</script>
+<script src="https://cdn.jsdelivr.net/npm/lucide@0.468.0/dist/umd/lucide.min.js" defer></script>
+<style type="text/tailwindcss">
+@layer components{
+.btn{@apply inline-flex items-center justify-center gap-2 rounded-lg bg-accent px-4 py-2 text-sm font-semibold text-canvas transition hover:brightness-110 hover:shadow-[0_0_18px_rgba(122,162,247,.4)]}
+.ghost{@apply inline-flex items-center gap-1.5 rounded-lg border border-accent/30 px-3 py-1.5 text-xs font-medium text-accent transition hover:bg-accent/10}
+.chip{@apply rounded-md bg-accent/10 px-2 py-1 font-mono text-xs text-accent}
+.inp{@apply w-full rounded-lg border border-line bg-canvas px-3 py-2.5 text-sm text-ink outline-none transition focus:border-accent focus:ring-1 focus:ring-accent}
+}
+</style>
+<style>
+body{background:#16161E;color:#C0CAF5}
+body::before{content:"";position:fixed;inset:0;z-index:-1;background:radial-gradient(rgba(122,162,247,.09) 1px,transparent 1px) 0 0/32px 32px;-webkit-mask:radial-gradient(ellipse at 50% 15%,#000,transparent 75%);mask:radial-gradient(ellipse at 50% 15%,#000,transparent 75%)}
+:focus-visible{outline:2px solid #7AA2F7;outline-offset:2px}
+#tl{position:fixed;left:14px;top:0;bottom:0;width:1px;z-index:30;pointer-events:none;background:linear-gradient(#24283B,rgba(122,162,247,.3),#24283B)}
+#tn{position:absolute;left:-4px;top:0;width:9px;height:9px;border-radius:50%;background:#7AA2F7;box-shadow:0 0 12px 3px rgba(122,162,247,.45)}
+.dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:#9ECE6A;box-shadow:0 0 8px rgba(158,206,106,.5);animation:br 4s ease-in-out infinite}
+@keyframes br{0%,100%{opacity:1}50%{opacity:.45}}
+@keyframes cr{50%{opacity:0}}
+.cur{animation:cr 1.2s steps(1) infinite}
+[data-tip]{position:relative}
+[data-tip]::after{content:attr(data-tip);position:absolute;left:50%;bottom:calc(100% + 8px);transform:translate(-50%,4px);white-space:nowrap;padding:4px 8px;border-radius:6px;background:#1F2335;border:1px solid rgba(122,162,247,.2);font:12px 'JetBrains Mono',monospace;color:#C0CAF5;opacity:0;pointer-events:none;transition:.2s}
+[data-tip].tb::after{bottom:auto;top:calc(100% + 10px)}
+[data-tip]:hover::after,[data-tip]:focus-visible::after{opacity:1;transform:translate(-50%,0)}
+.card{background:#1A1B26;border:1px solid rgba(122,162,247,.12);border-radius:12px;transition:border-color .3s,box-shadow .3s,transform .3s}
+.card:hover,.card.hl{border-color:rgba(122,162,247,.34);box-shadow:0 0 30px -8px rgba(122,162,247,.2)}
+.card.pj:hover{transform:translateY(-3px)}
+.bar{transform:scaleX(0);transform-origin:left;transition:transform .7s cubic-bezier(.2,.7,.2,1) calc(var(--i)*110ms)}
+.go .bar,.open .bar{transform:scaleX(1)}
+.pan{display:grid;grid-template-rows:0fr;transition:grid-template-rows .45s cubic-bezier(.2,.7,.2,1)}
+.pan>div{overflow:hidden}
+.open .pan{grid-template-rows:1fr}
+.open .chev{transform:rotate(180deg)}
+.chev{transition:transform .3s}
+.rv{opacity:0;transform:translateY(12px);transition:opacity .6s,transform .6s}
+.rv.in{opacity:1;transform:none}
+tr.r{transition:background .25s}
+tr.r:hover,tr.r:focus-visible,tr.r.on{background:rgba(122,162,247,.08)}
+td.on,th.on{background:rgba(122,162,247,.07);color:#7AA2F7}
+.md{display:inline-block;width:7px;height:7px;border-radius:50%;transition:transform .25s}
+tr.r:hover .md,tr.r:focus-visible .md{transform:scale(1.5)}
+.seg{transition:background .3s}
+.wo:hover .seg{background:rgba(122,162,247,.3);transition-delay:calc(var(--i)*100ms)}
+.row{transition:background .2s}
+.row:hover{background:rgba(122,162,247,.06)}
+.row .gt{opacity:0;transform:translateX(-4px);transition:.2s}
+.row:hover .gt{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){
+.rv{opacity:1;transform:none;transition:none}.bar{transform:none;transition:none}.dot,.cur{animation:none}.card.pj:hover{transform:none}html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body class="font-sans antialiased">
+<div id="tl" aria-hidden="true"><div id="tn"></div></div>
+
+<header class="sticky top-0 z-40 border-b border-line/80 bg-canvas/75 backdrop-blur-md">
+  <div class="mx-auto flex h-16 max-w-6xl items-center gap-6 px-8">
+    <a href="#top" class="font-mono text-sm md:text-base font-semibold tracking-tight text-ink transition hover:text-accent">
+      Ahmed Mohamed Abdulsamad <span class="text-accent">/</span>
+    </a>
+    <nav class="ml-4 hidden gap-6 text-sm text-muted md:flex" aria-label="Main">
+      <a class="transition hover:text-ink" href="#work">Work</a>
+      <a class="transition hover:text-ink" href="#capabilities">Capabilities</a>
+      <a class="transition hover:text-ink" href="#sprints">Sprints</a>
+      <a class="transition hover:text-ink" href="#contact">Contact</a>
+    </nav>
+    <div class="ml-auto flex items-center gap-4">
+      <span class="tb hidden items-center gap-2 font-mono text-xs text-muted sm:flex" data-tip="Replies within 24h" tabindex="0"><i class="dot"></i>Open for sprints</span>
+      <a href="#contact" class="btn">Let's Talk</a>
+    </div>
+  </div>
+</header>
+
+<main id="top" class="mx-auto max-w-6xl px-8">
+  <!-- Hero Section with Photo Integration -->
+  <section class="py-16 lg:py-24">
+    <div class="grid items-center gap-10 lg:grid-cols-12">
+      <!-- Left: Text content (col-span-7) -->
+      <div class="lg:col-span-7">
+        <p class="font-mono text-xs uppercase tracking-widest text-muted">Backend &amp; Systems Engineer</p>
+        <h1 class="mt-4 text-3xl font-semibold leading-[1.15] tracking-tight sm:text-5xl lg:text-5xl xl:text-6xl">
+          I build the part of your product<br>
+          <span class="bg-gradient-to-r from-ink to-accent bg-clip-text text-transparent">that can't go down.</span>
+        </h1>
+        <p class="mt-5 max-w-xl leading-relaxed text-muted">
+          Node.js (TypeScript) &amp; Python. Payments, clinical data, offline sync, and licensing, designed to stay correct when networks and machines misbehave.
+        </p>
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a href="#contact" class="btn">Book a Sprint <i data-lucide="arrow-right" class="h-4 w-4"></i></a>
+          <a href="#work" class="inline-flex items-center rounded-lg border border-line px-4 py-2 text-sm text-ink transition hover:border-accent/40 hover:bg-hov">See the work</a>
+        </div>
+        <div class="mt-8 flex flex-wrap gap-3 font-mono text-xs">
+          <span tabindex="0" data-tip="Budget for core API request paths" class="inline-flex items-center gap-2 rounded-md border border-line bg-surface px-3 py-1.5"><i class="h-1.5 w-1.5 rounded-full bg-accent"></i>&lt; 300ms latency</span>
+          <span tabindex="0" data-tip="Transactional writes + offline queues in POS sync" class="inline-flex items-center gap-2 rounded-md border border-line bg-surface px-3 py-1.5"><i class="h-1.5 w-1.5 rounded-full bg-accent"></i>Zero data loss</span>
+          <span tabindex="0" data-tip="Paymob callbacks verified in VALENCE" class="inline-flex items-center gap-2 rounded-md border border-ok/25 bg-ok/10 px-3 py-1.5 text-ok"><i data-lucide="check" class="h-3.5 w-3.5"></i>HMAC verified</span>
+        </div>
+      </div>
+
+      <!-- Right: Photo Avatar Card & Live Trace Panel (col-span-5) -->
+      <div class="flex flex-col gap-5 lg:col-span-5">
+        <!-- Profile Picture Box -->
+        <div class="card p-5 flex items-center gap-5 relative overflow-hidden group">
+          <div class="relative shrink-0">
+            <div class="absolute -inset-1 rounded-2xl bg-gradient-to-r from-accent to-violet opacity-25 blur group-hover:opacity-50 transition duration-500"></div>
+            <img src="me.jpg" 
+                 alt="Ahmed Mohamed Abdulsamad" 
+                 onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80';" 
+                 class="relative h-24 w-24 md:h-28 md:w-28 rounded-2xl object-cover border border-line bg-canvas shadow-xl">
+          </div>
+          <div class="min-w-0 flex-1">
+            <div class="flex items-center gap-2">
+              <span class="dot"></span>
+              <span class="font-mono text-xs text-ok">Active Engineer</span>
+            </div>
+            <h3 class="mt-1 font-semibold text-ink text-base md:text-lg truncate">Ahmed M. Abdulsamad</h3>
+            <p class="font-mono text-xs text-muted truncate">Cairo &middot; Remote Worldwide</p>
+            <p class="mt-2 font-mono text-[11px] text-accent/90">Specialized in High-Availability Backend Architecture</p>
+          </div>
+        </div>
+
+        <!-- Live Trace Panel -->
+        <div id="hp" class="card p-5 font-mono text-sm" role="img" aria-label="Live trace of a payment callback request, all spans healthy">
+          <p class="text-muted">$ <span class="text-ink">trace --live</span></p>
+          <div id="hw" class="mt-4 space-y-2.5"></div>
+          <p class="mt-5 flex items-center gap-2 border-t border-line pt-3 text-xs text-muted"><i class="dot"></i><span class="text-ok">all spans healthy</span><span class="cur ml-auto text-accent">_</span></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section id="work" class="scroll-mt-20 py-16">
+    <p class="font-mono text-xs uppercase tracking-widest text-accent">Selected work</p>
+    <h2 class="mt-2 text-3xl font-semibold tracking-tight">Systems that stay correct under pressure.</h2>
+    <p class="mt-2 text-muted">Click a card to open its request trace.</p>
+    <div id="proj" class="mt-10 grid items-start gap-5 md:grid-cols-2"></div>
+  </section>
+
+  <!-- Matrix -->
+  <section id="capabilities" class="scroll-mt-20 py-16">
+    <p class="font-mono text-xs uppercase tracking-widest text-accent">Capabilities</p>
+    <h2 class="mt-2 text-3xl font-semibold tracking-tight">Skills, cross-referenced with proof.</h2>
+    <p class="mt-2 text-muted">Hover a row to see which projects used it.</p>
+    <div class="card rv mt-10 overflow-x-auto"><table id="mx" class="w-full min-w-[34rem] text-sm"></table></div>
+  </section>
+
+  <!-- Sprints -->
+  <section id="sprints" class="scroll-mt-20 py-16">
+    <p class="font-mono text-xs uppercase tracking-widest text-accent">Sprints</p>
+    <h2 class="mt-2 text-3xl font-semibold tracking-tight">Fixed scope. Fixed price. Delivered in days.</h2>
+    <div id="wos" class="mt-10 grid gap-5 lg:grid-cols-3"></div>
+    <p class="mt-6 font-mono text-xs text-muted">50% to start, 50% on delivery. Written scope before any work begins.</p>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="scroll-mt-20 py-16 pb-24">
+    <p class="font-mono text-xs uppercase tracking-widest text-accent">Open channel</p>
+    <h2 class="mt-2 max-w-2xl text-3xl font-semibold tracking-tight">Something slow, fragile, or exposed? Let's open a channel.</h2>
+    <div class="mt-10 grid items-start gap-5 lg:grid-cols-2">
+      <div class="card rv overflow-hidden font-mono text-sm">
+        <p class="p-5 text-muted">ahmed@night-shift:~$ <span class="text-ink">contact --list</span></p>
+        <div id="ch"></div>
+        <p class="flex items-center gap-2 border-t border-line px-5 py-4 text-xs text-muted"><i class="dot"></i>typically replies within 24h<span class="cur ml-1 text-accent">_</span></p>
+      </div>
+      <form id="cf" class="card rv space-y-4 p-6" novalidate>
+        <div><label for="n" class="mb-1.5 block text-sm text-muted">Name</label><input id="n" name="name" class="inp" autocomplete="name" required minlength="2" maxlength="80"></div>
+        <div><label for="e" class="mb-1.5 block text-sm text-muted">Email</label><input id="e" name="email" type="email" class="inp" autocomplete="email" required maxlength="120"></div>
+        <div><label for="b" class="mb-1.5 block text-sm text-muted">Project brief</label><textarea id="b" name="brief" rows="5" class="inp resize-y" required minlength="20" maxlength="2000" placeholder="What is slow, broken, or missing? What does done look like?"></textarea></div>
+        <input name="company" tabindex="-1" autocomplete="off" class="hidden" aria-hidden="true">
+        <button id="sb" class="btn w-full" type="submit"><span id="bt">Send brief</span></button>
+        <p id="fm" class="min-h-[1.25rem] text-sm" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer class="border-t border-line py-8 text-center font-mono text-xs text-muted">&copy; 2026 Ahmed Mohamed Abdulsamad &middot; Cairo, Egypt &middot; <a href="#top" class="text-accent hover:underline">Back to top</a></footer>
+
+<script>
+const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
+const GH='https://github.com/Ahmedyasserx6d';
+
+// spans: [label, offset%, width%, kind] kind: v = verified, a = AI
+const P=[
+{n:'VALENCA',t:'Production E-Commerce Engine',tag:'Production',ep:'POST /payments/callback',
+ pb:'Spoofed or repeated payment callbacks can corrupt orders.',sl:'Paymob HMAC verification & atomic MongoDB transactions keep every order consistent.',
+ sp:[['receive',0,12],['verify HMAC',12,16,'v'],['begin txn',28,30],['commit order',58,16],['respond',74,10]],
+ st:['Node.js','TypeScript','MongoDB','Paymob'],
+ ln:[
+   ['Live Store','https://valenca-xi.vercel.app/','arrow-up-right',1],
+   ['GitHub Repo',GH,'github']
+ ]},
+{n:'Medi-Care',t:'Serverless Clinical Management Platform',tag:'Live',live:1,ep:'POST /consult/summary',
+ pb:'Clinical teams need fast, safe access to records and AI assistance.',sl:'Serverless clinical API on Vercel with Google Gemini AI integration and an emergency lockdown switch.',
+ sp:[['auth',0,10],['fetch record',10,22],['Gemini AI call',32,46,'a'],['respond',78,10]],
+ st:['React/Vite','Express Serverless','MongoDB','Gemini AI'],
+ ln:[
+   ['Live Frontend','https://frontend-ahmedyasserx6d.vercel.app/','arrow-up-right',1],
+   ['Public API (/doctors)','https://backend-eta-fawn-24.vercel.app/api/auth/doctors','arrow-up-right',1],
+   ['GitHub Repo',GH+'/Medi-Care','github']
+ ]},
+{n:'Fleet & Inventory ERP',t:'Hardware-Locked Desktop System',tag:'Desktop',ep:'LICENSE check on launch',
+ pb:'Desktop business software is vulnerable to unauthorized duplication across machines.',sl:'Python 3.10+ system with proprietary hardware-fingerprint machine licensing and automated SQLite ledger backups.',
+ sp:[['read fingerprint',0,20],['hash',20,12],['compare token',32,22,'v'],['unlock system',54,14]],
+ st:['Python','SQLite','Hardware Crypto','Windows Runner'],ln:[['GitHub Repo',GH,'github']]},
+{n:'Distributed Multi-Branch POS',t:'Offline-First Sync Engine',tag:'Offline-first',ep:'SYNC branch-03',
+ pb:'Branch registers must keep processing sales when ISP connectivity drops.',sl:'Offline-first transactional synchronization engine with local SQLite queues and conflict-free central MongoDB sync.',
+ sp:[['local commit',0,14],['queue event',14,16],['reconcile state',30,44],['acknowledge',74,12]],
+ st:['Node.js','TypeScript','SQLite','MongoDB'],ln:[['GitHub Repo',GH,'github']]}
+];
+
+const col=k=>k==='v'?'#9ECE6A':k==='a'?'#BB9AF7':'#7AA2F7';
+const wf=sp=>sp.map(([l,o,w,k],i)=>`<div class="flex items-center gap-3 text-xs"><span class="w-28 shrink-0 text-muted">${l}</span><span class="relative h-2 flex-1 rounded bg-white/5"><i class="bar absolute inset-y-0 rounded" style="--i:${i};left:${o}%;width:${w}%;background:${col(k)}"></i></span><span class="w-14 text-right ${k==='a'?'text-violet':'text-ok'}">${k==='v'?'verified':k==='a'?'AI':''}</span></div>`).join('');
+$('#hw').innerHTML=wf([['receive',0,12],['verify hmac',12,16,'v'],['begin txn',28,30],['commit',58,16],['respond',74,10]]);
+
+$('#proj').innerHTML=P.map((p,i)=>`
+<article class="card pj rv cursor-pointer p-6" data-i="${i}">
+  <div class="flex items-center justify-between font-mono text-xs text-muted"><span>0${i+1}</span><span class="flex items-center gap-1.5 ${p.live?'text-ok':''}">${p.live?'<i class="dot"></i>':''}${p.tag}</span></div>
+  <h3 class="mt-3 text-xl font-semibold">${p.n}</h3>
+  <p class="text-sm text-muted">${p.t}</p>
+  <dl class="mt-5 space-y-3 text-sm leading-relaxed">
+    <div class="grid grid-cols-[5.5rem_1fr] gap-2"><dt class="font-mono text-xs text-muted pt-0.5">PROBLEM</dt><dd>${p.pb}</dd></div>
+    <div class="grid grid-cols-[5.5rem_1fr] gap-2"><dt class="font-mono text-xs text-muted pt-0.5">SOLUTION</dt><dd>${p.sl}</dd></div>
+  </dl>
+  <div class="pan"><div><div class="mt-5 space-y-2.5 border-t border-line pt-4 font-mono"><p class="mb-3 text-xs text-muted">trace <span class="text-accent">${p.ep}</span></p>${wf(p.sp)}</div></div></div>
+  <div class="mt-5 flex flex-wrap gap-2">${p.st.map(s=>`<span class="chip ${s==='Gemini AI'?'!bg-violet/10 !text-violet':''}">${s}</span>`).join('')}</div>
+  <div class="mt-5 flex flex-wrap items-center gap-2">${p.ln.map(([l,h,ic,pr])=>`<a class="ghost ${pr?'':'!border-line !text-muted hover:!text-ink'}" href="${h}" target="_blank" rel="noopener noreferrer"><i data-lucide="${ic}" class="h-3.5 w-3.5"></i>${l}</a>`).join('')}
+    <button type="button" class="tg ml-auto inline-flex items-center gap-1 font-mono text-xs text-muted transition hover:text-ink" aria-expanded="false">View trace <i data-lucide="chevron-down" class="chev h-4 w-4"></i></button></div>
+</article>`).join('');
+$$('#proj .pj').forEach(c=>c.addEventListener('click',e=>{if(e.target.closest('a'))return;const o=c.classList.toggle('open');$('.tg',c).setAttribute('aria-expanded',o)}));
+
+// Capability matrix
+const M=[['Runtime','#7AA2F7',[['Node.js / TypeScript','1101'],['Python','0010']]],['Data','#7AA2F7',[['MongoDB transactions','1101'],['SQLite','0011']]],['Systems & Security','#9ECE6A',[['Linux','1101'],['HMAC verification','1000'],['Hardware licensing','0010'],['Offline sync','0001']]]];
+$('#mx').innerHTML=`<thead><tr class="border-b border-line text-left font-mono text-xs text-muted"><th class="px-5 py-3 font-normal">CAPABILITY</th>${P.map((p,j)=>`<th data-c="${j}" class="cth px-3 py-3 text-center font-normal">${['VALENCE','MEDI-CARE','FLEET ERP','POS SYNC'][j]}</th>`).join('')}</tr></thead><tbody>`+
+M.map(([g,c,rows])=>`<tr><td colspan="5" class="px-5 pb-1 pt-5 font-mono text-xs" style="color:${c}">${g}</td></tr>`+rows.map(([s,m])=>`<tr class="r" tabindex="0" data-m="${m}"><td class="px-5 py-2.5">${s}</td>${[...m].map((v,j)=>`<td data-c="${j}" class="px-3 py-2.5 text-center">${v==1?`<i class="md" style="background:${c}"></i>`:''}</td>`).join('')}</tr>`).join('')).join('')+'</tbody>';
+const hl=m=>{$$('#proj .pj').forEach((c,i)=>c.classList.toggle('hl',!!m&&m[i]=='1'));$$('#mx [data-c]').forEach(e=>e.classList.toggle('on',!!m&&m[e.dataset.c]=='1'))};
+$$('#mx tr.r').forEach(r=>{r.onmouseenter=r.onfocus=()=>hl(r.dataset.m);r.onmouseleave=r.onblur=()=>hl('')});
+$$('#mx .cth').forEach(h=>{const j=h.dataset.c,on=v=>{$$('#mx tr.r').forEach(r=>r.classList.toggle('on',v&&r.dataset.m[j]=='1'));$$('#proj .pj').forEach((c,i)=>c.classList.toggle('hl',v&&i==j))};h.onmouseenter=()=>on(1);h.onmouseleave=()=>on(0)});
+
+// Sprints
+const W=[
+{id:'WO-01',t:'API & Payment Integration',d:3,p:'$250',s:['Scope','Build','Ship'],i:['Production-ready REST and webhook integration','Signature verification and error handling','Docs + handoff']},
+{id:'WO-02',t:'Database Query Tuning & Indexing',d:4,p:'$500',f:1,s:['Find','Fix','Verify','Docs'],i:['Slow-query audit','Index and query rewrites','Before/after performance report','Docs + handoff']},
+{id:'WO-03',t:'Web & API Security Audit',d:5,p:'$750',s:['Map','Test','Fix','Re-test','Report'],i:['Auth, input and access-control review','Prioritized findings report','Fix guidance and re-test','Docs + handoff']}];
+$('#wos').innerHTML=W.map(w=>`
+<article class="card wo rv flex flex-col p-6 ${w.f?'!border-violet/40':''}">
+  <div class="flex items-center justify-between font-mono text-xs"><span class="text-muted">${w.id}</span><span class="chip">${w.d} days</span></div>
+  <h3 class="mt-4 text-lg font-semibold">${w.t}</h3>
+  ${w.f?'<span class="mt-2 w-fit rounded-md bg-violet/10 px-2 py-1 font-mono text-xs text-violet">Most Asked</span>':''}
+  <p class="mt-5 font-mono text-4xl font-medium tabular-nums">${w.p}<span class="ml-2 text-xs font-normal text-muted">fixed</span></p>
+  <div class="mt-5 flex gap-1">${w.s.map((x,i)=>`<span class="seg flex-1 rounded bg-accent/10 py-1 text-center font-mono text-[10px] text-accent" style="--i:${i}">${x}</span>`).join('')}</div>
+  <ul class="mt-5 flex-1 space-y-2 text-sm">${w.i.map(x=>`<li class="flex gap-2"><i data-lucide="check" class="mt-0.5 h-4 w-4 shrink-0 text-ok"></i>${x}</li>`).join('')}</ul>
+  <a href="#contact" data-wo="${w.id}" class="${w.f?'btn':'inline-flex items-center justify-center rounded-lg border border-line px-4 py-2 text-sm transition hover:border-accent/40 hover:bg-hov'} mt-6">Start ${w.id}</a>
+</article>`).join('');
+$$('[data-wo]').forEach(a=>a.addEventListener('click',()=>{const b=$('#b');if(!b.value)b.value=`[${a.dataset.wo}] `}));
+
+// Contact channels + copy
+const C=[['email','a9111091@gmail.com','mailto:a9111091@gmail.com'],['whatsapp','+20 1555190555','https://wa.me/201555190555'],['github','https://github.com/Ahmedyasserx6d',GH],['location','Cairo, Egypt (Remote Worldwide & GCC)']];
+$('#ch').innerHTML=C.map(([l,v,h])=>`<div class="row group flex items-center gap-3 px-5 py-3"><span class="gt text-accent">&gt;</span><span class="w-20 shrink-0 text-muted">${l}</span>${h?`<a class="min-w-0 flex-1 truncate hover:text-accent" href="${h}" ${h.startsWith('http')?'target="_blank" rel="noopener noreferrer"':''}>${v}</a>`:`<span class="flex-1">${v}</span>`}${h?`<button type="button" data-copy="${v}" class="shrink-0 text-muted transition hover:text-accent" aria-label="Copy ${l}"><i data-lucide="copy" class="h-4 w-4"></i></button>`:''}</div>`).join('');
+$$('[data-copy]').forEach(b=>b.addEventListener('click',async()=>{const v=b.dataset.copy;try{await navigator.clipboard.writeText(v)}catch{const t=document.createElement('textarea');t.value=v;document.body.append(t);t.select();document.execCommand('copy');t.remove()}
+ b.innerHTML='<i data-lucide="check" class="h-4 w-4 text-ok"></i>';lucide.createIcons();setTimeout(()=>{b.innerHTML='<i data-lucide="copy" class="h-4 w-4"></i>';lucide.createIcons()},1600)}));
+
+// Form
+$('#cf').addEventListener('submit',async e=>{e.preventDefault();const f=e.target,m=$('#fm'),b=$('#sb'),t=$('#bt');
+ if(!f.checkValidity()){f.reportValidity();return}
+ b.disabled=true;t.textContent='Sending...';m.className='min-h-[1.25rem] text-sm text-muted';m.textContent='';
+ try{const r=await fetch('/api/contact',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(Object.fromEntries(new FormData(f)))});const d=await r.json();
+  if(d.ok){m.className='min-h-[1.25rem] text-sm text-ok';m.textContent=d.message;f.reset()}else{m.className='min-h-[1.25rem] text-sm text-red-300';m.textContent=d.error||'Something went wrong.'}
+ }catch{m.className='min-h-[1.25rem] text-sm text-red-300';m.textContent='Network error. Check your connection or email a9111091@gmail.com.'}
+ b.disabled=false;t.textContent='Send brief'});
+
+// Reveal, hero trace, trace line
+const io=new IntersectionObserver(es=>es.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}}),{threshold:.12});
+$$('.rv').forEach(el=>io.observe(el));
+requestAnimationFrame(()=>setTimeout(()=>$('#hp').classList.add('go'),250));
+const tn=$('#tn');let tk=0;
+const mv=()=>{tk=0;const h=document.documentElement,max=h.scrollHeight-innerHeight,p=max>0?scrollY/max:0;tn.style.transform=`translateY(${p*(innerHeight-9)}px)`};
+addEventListener('scroll',()=>{if(!tk)tk=requestAnimationFrame(mv)},{passive:true});addEventListener('resize',mv);mv();
+addEventListener('load',()=>lucide.createIcons());
+if(window.lucide)lucide.createIcons();
+</script>
+</body>
+</html>
